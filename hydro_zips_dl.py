@@ -1,8 +1,9 @@
-from bs4 import BeautifulSoup
-import requests
-import urllib.request
 import os
+import urllib.request
 import zipfile
+
+import requests
+from bs4 import BeautifulSoup
 
 download_dir = './hydro/monthly_hydro_extracted_zips'
 download_dir1 = './hydro/daily_hydro_extracted_zips'
