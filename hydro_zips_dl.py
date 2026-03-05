@@ -18,10 +18,16 @@ for i in range(2000, 2022):
     url = f'https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/miesieczne/{i}/'
     url_daily = f'https://danepubliczne.imgw.pl/data/dane_pomiarowo_obserwacyjne/dane_hydrologiczne/dobowe/{i}/'
 
-    html_page = requests.get(url)
+    try:
+        html_page = requests.get(url, timeout=10)
+    except requests.exceptions.Timeout:
+        print(f"Timeout occurred while fetching {url}")
     soup = BeautifulSoup(html_page.content, 'html.parser')
 
-    html_page_d = requests.get(url_daily)
+    try:
+        html_page_d = requests.get(url_daily, timeout=10)
+    except requests.exceptions.Timeout:
+        print(f"Timeout occurred while fetching {url_daily}")
     soup_d = BeautifulSoup(html_page_d.content, 'html.parser')
 
     for link in soup.find_all('a'):
